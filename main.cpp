@@ -6,7 +6,7 @@
 #include "vol_math_filter_interface.h"
 #include <stdio.h>
 #include <tchar.h>
-
+#include "AnistropicMatrix.h"
 ImageVolume * testinterface()
 {
 	int l = 281, m = 481, n = 50;
@@ -129,9 +129,21 @@ void testprocess()
 	//unsigned char* data = (unsigned char*)Raw2ImageVolume(*ret,1);
 	test.writeImagesesmicarray(ret->Data ,ret->Width,ret->Height,ret->Depth);
 }
+
+
+void testeigen()
+{
+	PIXTYPE indata[9]={1,0,0,0,2,0,0,0,3};
+	AnistropicMatrix *test=new AnistropicMatrix();
+	Eigen *eigen= new Eigen();
+	test->EigenValuesAndEigenVectors(indata,*eigen);
+	
+}
 int main(int argc, char* argv[])
 {
-	testinterface();
+	//testinterface();
+	
+	testeigen();
 	system("pause");
 	return 1;
 
