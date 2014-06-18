@@ -225,3 +225,39 @@ bool AnistropicMatrix::EigenValuesAndEigenVectors( PIXTYPE inmatrix[],Eigen & ei
 
 
 }
+
+/**
+ \brief	Calculates the jacobi matrix.
+
+ \param [in,out]	src	If non-null, source for the.
+ \param	jacobim		   	The jacobim.
+
+ \return	true if it succeeds, false if it fails.
+ */
+
+bool AnistropicMatrix::ComputeJacobiMatrix( Raw *src,vector <Jacobi> jacobim )
+{
+	for (int i= 0; i< src->getXsize(); i++ )
+	{
+		for (int j = 0; j < src->getYsize(); j++ )
+		{
+			for (int k = 0; k < src->getZsize(); k++)
+			{
+				Jacobi * point = new  Jacobi();
+				//9 data of matrix
+				// IXX,IXY,IXZ
+				// IYX,IYY,IYZ
+				// IZX,IZY,IZZ
+				// IXX
+				point->jacobimarix.push_back(src->get(i+1,j,k)+src->get(i-1,j,k)-2*src->get(i,j,k));
+				//IXY
+				point->jacobimarix.push_back(src->get(i+1,j,k)+src->get(i-1,j,k)-2*src->get(i,j,k));
+				jacobim.push_back(*point);
+
+			}
+		}
+	}
+	return true;
+}
+
+

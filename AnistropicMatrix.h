@@ -10,14 +10,20 @@
 using namespace std;
 //using std::vector;
 class Eigen;
+class Jacobi;
 class AnistropicMatrix
 {
 public:
 	AnistropicMatrix(void);
 	~AnistropicMatrix(void);
 	bool EigenValuesAndEigenVectors(PIXTYPE [],Eigen &);
+	bool ComputeJacobiMatrix(Raw *src,vector<Jacobi> jacobim);
 
 };
+
+/**
+ \brief	Eigen.store the eigen for every point
+ */
 
 class Eigen
 {
@@ -29,10 +35,15 @@ public:
 	Eigen(void);
 	~Eigen();
 };
+
+/**
+ \brief	Jacobi.store the jacobi matrix for every point
+ */
+
 class Jacobi
 {
 	public:
-		vector <double> jacobim;
-
+		vector <double> jacobimarix;
+		
 };
 
